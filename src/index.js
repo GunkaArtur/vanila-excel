@@ -2,4 +2,4 @@ import "./scss/index.scss";
 
 console.log("Hello world");
 
-//TODO: 1.07
+//TODO: 2.08
