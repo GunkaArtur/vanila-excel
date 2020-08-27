@@ -1,5 +1,9 @@
 import "./scss/index.scss";
+import { Excel } from "./components/excel/Excel";
 
-console.log("Hello world");
+const excel = new Excel("#app", {
+  components: []
+});
 
-//TODO: 2.08
+console.log("excel", excel);
+//TODO: 3.03
