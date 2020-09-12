@@ -6,8 +6,8 @@ import { Formula } from "./components/formula/Formula";
 import { Table } from "./components/table/Table";
 
 const excel = new Excel("#app", {
-  components: [Header, Toolbar, Formula, Table]
+  components: [Header, Toolbar, Formula, Table],
 });
 
 excel.render();
-//TODO: next video 3.10
+//TODO: next video 4.2
