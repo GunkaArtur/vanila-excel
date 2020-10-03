@@ -13,7 +13,9 @@
     "quotes": "off",
     "object-curly-spacing": "off",
     "spaced-comment": "off",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "indent": "off",
+    "max-len": "off"
 
   },
   "extends": ["eslint:recommended", "google"]
