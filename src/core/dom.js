@@ -51,8 +51,20 @@ class Dom {
     return this.$el.getBoundingClientRect();
   }
 
+  find(selector) {
+    return $(this.$el.querySelector(selector));
+  }
+
   findAll(selector) {
     return this.$el.querySelectorAll(selector);
+  }
+
+  addClass(classname) {
+    this.$el.classList.add(classname);
+  }
+
+  removeClass(classname) {
+    this.$el.classList.remove(classname);
   }
 
   css(styles = {}) {
