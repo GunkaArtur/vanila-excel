@@ -59,6 +59,17 @@ class Dom {
     return this.$el.querySelectorAll(selector);
   }
 
+  id(parse) {
+    if (parse) {
+      const parsed = this.id().split(":");
+      return {
+        row: +parsed[0],
+        col: +parsed[1]
+      };
+    }
+    return this.data.id;
+  }
+
   addClass(classname) {
     this.$el.classList.add(classname);
   }

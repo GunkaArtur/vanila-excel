@@ -1,7 +1,7 @@
 import { ExcelComponent } from "../../core/ExcelComponent";
 import { createTable } from "./table.template";
 import { resizeHandler } from "./table.resize";
-import { isCell, shouldResize } from "./tableFunctions";
+import { isCell, matrix, shouldResize } from "./tableFunctions";
 import { TableSelection } from "./TableSelection";
 import { $ } from "../../core/dom";
 
@@ -33,8 +33,17 @@ export class Table extends ExcelComponent {
     if (shouldResize(event)) {
       resizeHandler(this.$root, event);
     } else if (isCell(event)) {
-      const target = $(event.target);
-      this.selection.select(target);
+      const $target = $(event.target);
+      const shiftKey = event.shiftKey;
+
+      if (shiftKey) {
+        const $cells = matrix($target, this.selection.current).map(id =>
+          this.$root.find(`[data-id="${id}"]`)
+        );
+        this.selection.selectGroup($cells);
+      } else {
+        this.selection.select($target);
+      }
     }
   }
 }
