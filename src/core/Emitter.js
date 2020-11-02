@@ -1,4 +1,4 @@
-export class Emtter {
+export class Emitter {
   constructor() {
     this.listeners = {};
   }
