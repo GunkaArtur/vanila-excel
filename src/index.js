@@ -10,4 +10,3 @@ const excel = new Excel("#app", {
 });
 
 excel.render();
-//TODO: next video 4.6
