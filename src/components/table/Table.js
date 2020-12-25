@@ -3,6 +3,7 @@ import { createTable } from "./table.template";
 import { resizeHandler } from "./table.resize";
 import { isCell, matrix, nextSelector, shouldResize } from "./tableFunctions";
 import { TableSelection } from "./TableSelection";
+import * as actions from "../redux/actions";
 import { $ } from "../../core/dom";
 
 export class Table extends ExcelComponent {
@@ -37,6 +38,10 @@ export class Table extends ExcelComponent {
     this.$on("formula:done", () => {
       this.selection.current.focus();
     });
+
+    // this.$subscribe(state => {
+    //   console.log("here", state);
+    // });
   }
 
   selectCell($cell) {
@@ -48,9 +53,18 @@ export class Table extends ExcelComponent {
     this.$emit("table:input", $(event.target));
   }
 
+  async resizeTable(event) {
+    try {
+      const data = await resizeHandler(this.$root, event);
+      this.$dispatch(actions.tableResize(data));
+    } catch (e) {
+      console.error(e.message);
+    }
+  }
+
   onMousedown(event) {
     if (shouldResize(event)) {
-      resizeHandler(this.$root, event);
+      this.resizeTable(event);
     } else if (isCell(event)) {
       const $target = $(event.target);
       const shiftKey = event.shiftKey;
@@ -61,7 +75,7 @@ export class Table extends ExcelComponent {
         );
         this.selection.selectGroup($cells);
       } else {
-        this.selection.select($target);
+        this.selectCell($target);
       }
     }
   }
